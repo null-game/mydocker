@@ -1,11 +1,8 @@
-version: '3'
-services:
-  node:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./opt:/usr/src/app # ローカルとコンテナ内の同期    
-    ports:
-      - "3000:3000"
-    stdin_open: true 
+version: '3' #docker-composeのバージョン
+services: #起動したいコンテナの種類
+  redis-server:
+    image: 'redis' #redisイメージでコンテナを起動
+  node-app:
+    build: . #カレントディレクトリのDockerfileからイメージをビルドしてコンテナを起動
+    ports: #ポートマッピング([localhostのポート番号]:[コンテナのポート番号])
+      - '4001:8081'
